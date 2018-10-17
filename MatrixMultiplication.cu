@@ -35,6 +35,7 @@ int main(int argc,char **argv)
     int n=4;
     //Number of blocks
     int nBytes = n*n*sizeof(int);
+
     //Block size and number
     int block_size, block_no;
 
