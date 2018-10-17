@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int *a, *b;  // host data
-int *c;  // results
+int *ha, *hb, *hc;  // host data
+int *hd;  // results
 
 __global__
 void add(int *a, int *b, int *c, int *d, int N) {
@@ -24,19 +24,15 @@ void addCPU(int *a,int *b, int *c, int *d, int N){
 int main() {
     int N = 1000;
 
-    int ha = n*n*sizeof(int);
-    int hb = n*n*sizeof(int);
-    int hc = n*n*sizeof(int);
-    int hd = n*n*sizeof(int);
-
-    int nBytes = n*n*sizeof(int);
+    int nBytes = N*N*sizeof(int);
     //Block size and number
     int block_size, block_no;
 
     //memory allocation
-    a = (int *) malloc(nBytes);
-    b = (int *) malloc(nBytes);
-    c = (int *) malloc(nBytes);
+    ha = (int *) malloc(nBytes);
+    hb = (int *) malloc(nBytes);
+    hc = (int *) malloc(nBytes);
+    hd = (int *) malloc(nBytes);
 
     block_size = 8; //threads per block
     block_no = n*n/block_size;
