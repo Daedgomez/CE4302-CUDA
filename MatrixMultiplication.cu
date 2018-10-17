@@ -45,8 +45,8 @@ int main(int argc,char **argv)
     c2 = (int *) malloc(nBytes);
 
     int *a_d,*b_d,*c_d;
-    block_size = 250; //threads per block
-    block_no = n/block_size;
+    block_size = 8; //threads per block
+    block_no = n*n/block_size;
 
     //Work definition
     dim3 dimBlock(block_size, 1, 1);
