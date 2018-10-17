@@ -18,7 +18,7 @@ __global__
 void matMul(int *A,int *B,int *C, int N){
     int row=blockIdx.x*blockDim.x+threadIdx.x;
     int col=blockIdx.y*blockDim.y+threadIdx.y;
-    if(row<N && col <N) {
+    if(row < N && col < N) {
      float product_val = 0;
      for(int k=0;k<N;k++) {
         product_val += A[row*N+k]*B[k*N+col];
@@ -45,8 +45,8 @@ int main(int argc,char **argv)
     c2 = (int *) malloc(nBytes);
 
     int *a_d,*b_d,*c_d;
-    block_size = 250; //threads per block
-    block_no = n/block_size;
+    block_size = 8; //threads per block
+    block_no = n*n/block_size;
 
     //Work definition
     dim3 dimBlock(block_size, 1, 1);
