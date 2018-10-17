@@ -18,12 +18,12 @@ __global__
 void matMul(int *A,int *B,int *C, int N){
     int row=blockIdx.x*blockDim.x+threadIdx.x;
     int col=blockIdx.y*blockDim.y+threadIdx.y;
-    if(row<n && col <n) {
-     float product_val = 0
-     for(int k=0;k<n;k++) {
-        product_val += A[row*n+k]*B[k*n+col];
+    if(row<N && col <N) {
+     float product_val = 0;
+     for(int k=0;k<N;k++) {
+        product_val += A[row*N+k]*B[k*N+col];
       }
-    C[row*n+col] = product_val;
+    C[row*N+col] = product_val;
     }
 
 }
