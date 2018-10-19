@@ -35,7 +35,7 @@ int main() {
     hd = (int *) malloc(nBytes);
 
     block_size = 8; //threads per block
-    block_no = n*n/block_size;
+    block_no = N*N/block_size;
 
     //Work definition
     dim3 dimBlock(block_size, 1, 1);
@@ -63,9 +63,6 @@ int main() {
 
     cudaMemcpy(hd, dd, N*sizeof(int), cudaMemcpyDeviceToHost);
 
-    for (int i = 0; i<N; ++i) {
-        printf("%d\n", hb[i]);
-    }
 
     cudaFree(da);
     cudaFree(db);
