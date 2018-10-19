@@ -68,7 +68,7 @@ int main() {
 
 
     clock_t start_h = clock();
-    addCPU(da, db, dc, dd, N);
+    addCPU(ha, hb, hc, hd, N);
     clock_t end_h = clock();
 
     //Time computing
