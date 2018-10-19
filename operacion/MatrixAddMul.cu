@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cuda.h>
 
 int *ha, *hb, *hc;  // host data
 int *hd;  // results
@@ -59,10 +60,22 @@ int main() {
     cudaMemcpy(db, hb, N*N*sizeof(int), cudaMemcpyHostToDevice);
     cudaMemcpy(dc, hc, N*N*sizeof(int), cudaMemcpyHostToDevice);
 
+    clock_t start_d=clock();
     add<<<block_no,block_size>>>(da, db, dc, dd, N);
 
     cudaMemcpy(hd, dd, N*sizeof(int), cudaMemcpyDeviceToHost);
+    clock_t end_d = clock();
 
+
+    clock_t start_h = clock();
+    addCPU(da, db, dc, dd, N);
+    clock_t end_h = clock();
+
+    //Time computing
+    double time_d = (double)(end_d-start_d)/CLOCKS_PER_SEC;
+    double time_h = (double)(end_h-start_h)/CLOCKS_PER_SEC;
+
+    printf("n = %d \t GPU time = %fs \t CPU time = %fs\n", N, time_d, time_h);
 
     cudaFree(da);
     cudaFree(db);
